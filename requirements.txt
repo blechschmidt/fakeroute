@@ -1,2 +1,2 @@
-scapy-python3
-python-daemon
+scapy
+pyroute2
