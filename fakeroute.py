@@ -254,8 +254,6 @@ class TracerouteFakeTarget:
         if self.num_addresses(6) > 0:
             self.setup_firewall(socket.AF_INET6)
 
-        self.capture = LowTTLCapture(self)
-
     def setup_firewall(self, nfgen_family):
         # noinspection PyUnresolvedReferences
         with pyroute2.NFTables(nfgen_family=nfgen_family) as nft:
@@ -290,18 +288,10 @@ class TracerouteFakeTarget:
         self.spoofer.spoof(bytes(packet))
 
     def run(self):
-        self.capture.run()
-
-
-class LowTTLCapture:
-    def __init__(self, spoofer):
-        self.spoofer = spoofer
-
-    def run(self):
         sockets = []
-        if self.spoofer.num_addresses(4) > 0:
+        if self.num_addresses(4) > 0:
             sockets.append(socket.socket(socket.AF_PACKET, socket.SOCK_DGRAM, ETH_IP))
-        if self.spoofer.num_addresses(6) > 0:
+        if self.num_addresses(6) > 0:
             sockets.append(socket.socket(socket.AF_PACKET, socket.SOCK_DGRAM, ETH_IP6))
         while True:
             read, _, _ = select.select(sockets, [], [])
@@ -309,8 +299,8 @@ class LowTTLCapture:
                 payload, _ = r.recvfrom(0xffff)
                 version, src, dst, ttl = get_packet_info(payload)
                 logging.debug('IPv%d packet from %s to %s, TTL %d' % (version, src, dst, ttl))
-                if ttl <= self.spoofer.num_addresses(version):
-                    self.spoofer.spoof(payload)
+                if ttl <= self.num_addresses(version):
+                    self.spoof(payload)
 
 
 def main():
@@ -323,7 +313,7 @@ def main():
     addresses = DEFAULT_ADDRESSES
     if args.hops is not None:
         with open(args.hops, 'r') as f:
-            addresses = [line.strip() for line in f.readlines()]
+            addresses = [line.strip() for line in f.readlines() if line.strip() != '']
 
     key = None
     if args.key is not None:
