@@ -18,8 +18,8 @@ import pyroute2
 from scapy.layers.inet import IP, ICMP
 from scapy.layers.inet6 import IPv6, ICMPv6TimeExceeded
 
-ETH_IP = 0x0008
-ETH_IP6 = 0xdd86
+ETH_P_IP = socket.htons(0x0800)
+ETH_P_IP6 = socket.htons(0x86dd)
 
 DEFAULT_ADDRESSES = [
     "217.115.147.245",  # Verfassungsschutz
@@ -290,9 +290,9 @@ class TracerouteFakeTarget:
     def run(self):
         sockets = []
         if self.num_addresses(4) > 0:
-            sockets.append(socket.socket(socket.AF_PACKET, socket.SOCK_DGRAM, ETH_IP))
+            sockets.append(socket.socket(socket.AF_PACKET, socket.SOCK_DGRAM, ETH_P_IP))
         if self.num_addresses(6) > 0:
-            sockets.append(socket.socket(socket.AF_PACKET, socket.SOCK_DGRAM, ETH_IP6))
+            sockets.append(socket.socket(socket.AF_PACKET, socket.SOCK_DGRAM, ETH_P_IP6))
         while True:
             read, _, _ = select.select(sockets, [], [])
             for r in read:
