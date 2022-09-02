@@ -177,10 +177,10 @@ class RemoteSpoofer:
         data = b''
         sig_len = 0
         sig = b''
-        if self.key is not None:
-            sig = hmac.new(self.key, packet, hashlib.sha256).digest()
-            sig_len = len(sig)
         timestamp = struct.pack('!Q', int(time.time()))
+        if self.key is not None:
+            sig = hmac.new(self.key, timestamp + packet, hashlib.sha256).digest()
+            sig_len = len(sig)
         data += bytes([sig_len]) + sig + timestamp + packet
         self.socket.sendto(data, self.remote_addr)
 
