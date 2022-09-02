@@ -7,6 +7,7 @@ import hashlib
 import hmac
 import ipaddress
 import logging
+import os
 import select
 import socket
 import struct
@@ -304,6 +305,8 @@ class TracerouteFakeTarget:
 
 
 def main():
+    logging.basicConfig(level=os.environ.get('LOGLEVEL', 'INFO'))
+
     parser = argparse.ArgumentParser(description='Fake traceroute generator')
     parser.add_argument('--hops', help='Path to file containing IPv4 and IPv6 addresses')
     parser.add_argument('--remote', help='IP:port of remote spoofing service')
