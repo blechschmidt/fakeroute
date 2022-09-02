@@ -48,6 +48,18 @@ The `fakeroute.py` script uses a raw socket to capture packets with low TTL and 
 a [data center without egress filtering](https://spoofer.caida.org/as_stats.php) (i.e. where packets with spoofed source
 IP address are not filtered) or generates ICMP replies for them from fake source IP addresses directly.
 
+## Where does it work?
+
+Most providers will filter packets with forged IP addresses. An incomplete list of server providers without egress
+filtering is available here:
+
+| Provider                   | Date                                                                                |
+|----------------------------|-------------------------------------------------------------------------------------|
+| [njal.la](https://njal.la) | [September 2, 2022](https://spoofer.caida.org/report.php?sessionkey=bjuru7gyraov66) |
+
+If you know more server providers, please submit a pull request with the details (provider name, date and, if possible,
+a CAIDA Spoofer report).
+
 ## Screenshot
 
 ![Screenshot](https://cysec.biz/projects/fakeroute/screenshot1.png)
