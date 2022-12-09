@@ -1,7 +1,7 @@
 # fakeroute
 
-Fakeroute allows you to insert fake IPv4 and IPv6 hops between the last real hop and your server by making use of IP
-address spoofing. It only supports Linux. Obviously, this is just a fun project. Do not use it for anything serious.
+Fakeroute allows you to insert fake IPv4 and IPv6 hops between the last real hop and your Linux server by making use of
+IP address spoofing.
 
 ## Setup
 
@@ -36,7 +36,7 @@ options:
 ## How does it work?
 
 IP packet headers contain a one byte time to live (TTL, IPv4) or hop limit (HL, IPv6) field which is supposed to be
-decreased by every router on the packet's path in order to prevent infinite circulations.
+decreased by every router on the packet's path to prevent infinite circulations.
 Initially, the sender populates the packet with a sufficiently large value.
 Most routers signal the expiry of the TTL by replying with an ICMP "TTL expired" packet to the packet sender.
 Tracerouting works by sending out packets with increasing TTL.
@@ -53,11 +53,11 @@ IP address are not filtered) or generates ICMP replies for them from fake source
 Most providers will filter packets with forged IP addresses. An incomplete list of server providers without egress
 filtering is available here:
 
-| Provider                   | Date                                                                                |
-|----------------------------|-------------------------------------------------------------------------------------|
-| [njal.la](https://njal.la) | [September 2, 2022](https://spoofer.caida.org/report.php?sessionkey=bjuru7gyraov66) |
+| Provider                   | Product                            | Date                                                                                |
+|----------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| [njal.la](https://njal.la) | [VPS 15](https://njal.la/servers/) | [September 2, 2022](https://spoofer.caida.org/report.php?sessionkey=bjuru7gyraov66) |
 
-If you know more server providers, please submit a pull request with the details (provider name, date and, if possible,
+If you know more server providers, please submit a pull request with the details (provider name, product name, date, and, if possible,
 a CAIDA Spoofer report).
 
 ## Screenshot

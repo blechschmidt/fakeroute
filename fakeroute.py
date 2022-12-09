@@ -280,8 +280,7 @@ class TracerouteFakeTarget:
     def spoof(self, payload):
         version, src, dst, ttl = get_packet_info(payload)
         spoof_addr = str(self.addrs[version][ttl - 1])
-        if spoof_addr is None:
-            return
+        logging.debug("Spoof IPv%d packet from %s to %s" % (version, spoof_addr, src))
         if version == 4:
             packet = IP(src=spoof_addr, dst=src) / ICMP(type=0xb, code=0) / payload
         else:
@@ -299,8 +298,7 @@ class TracerouteFakeTarget:
             for r in read:
                 payload, _ = r.recvfrom(0xffff)
                 version, src, dst, ttl = get_packet_info(payload)
-                logging.debug('IPv%d packet from %s to %s, TTL %d' % (version, src, dst, ttl))
-                if ttl <= self.num_addresses(version):
+                if 1 <= ttl <= self.num_addresses(version):
                     self.spoof(payload)
 
 
