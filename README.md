@@ -54,7 +54,7 @@ Most providers will filter packets with forged IP addresses. An incomplete list 
 filtering is available here:
 
 | Provider                   | Product                            | Date                                                                                |
-|----------------------------|--------------------------------------------------------------------------------------------------------------------------|
+|----------------------------|------------------------------------|-------------------------------------------------------------------------------------|
 | [njal.la](https://njal.la) | [VPS 15](https://njal.la/servers/) | [September 2, 2022](https://spoofer.caida.org/report.php?sessionkey=bjuru7gyraov66) |
 
 If you know more server providers, please submit a pull request with the details (provider name, product name, date, and, if possible,
