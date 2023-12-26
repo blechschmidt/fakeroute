@@ -15,7 +15,7 @@ import sys
 import time
 import traceback
 
-import pyroute2
+from pyroute2.nftables.main import NFTables
 from scapy.layers.inet import IP, ICMP
 from scapy.layers.inet6 import IPv6, ICMPv6TimeExceeded
 
@@ -257,7 +257,7 @@ class TracerouteFakeTarget:
 
     def setup_firewall(self, nfgen_family):
         # noinspection PyUnresolvedReferences
-        with pyroute2.NFTables(nfgen_family=nfgen_family) as nft:
+        with NFTables(nfgen_family=nfgen_family) as nft:
             nft.table('add', name='fakeroute')
             nft.chain('add', table='fakeroute', name='fakeroute', type='filter', hook='input')
             num_addresses = self.num_addresses(nfgen_family_to_ip_version(nfgen_family))
@@ -267,11 +267,11 @@ class TracerouteFakeTarget:
     def delete_firewall_rules(self, *_, **__):
         if self.num_addresses(4) > 0:
             # noinspection PyUnresolvedReferences
-            with pyroute2.NFTables(nfgen_family=socket.AF_INET) as nft:
+            with NFTables(nfgen_family=socket.AF_INET) as nft:
                 nft.table('del', name='fakeroute')
         if self.num_addresses(6) > 0:
             # noinspection PyUnresolvedReferences
-            with pyroute2.NFTables(nfgen_family=socket.AF_INET6) as nft:
+            with NFTables(nfgen_family=socket.AF_INET6) as nft:
                 nft.table('del', name='fakeroute')
 
     def num_addresses(self, version):
