@@ -53,9 +53,9 @@ IP address are not filtered) or generates ICMP replies for them from fake source
 Most providers will filter packets with forged IP addresses. An incomplete list of server providers without egress
 filtering is available here:
 
-| Provider                   | Product                            | Date                                                                                |
-|----------------------------|------------------------------------|-------------------------------------------------------------------------------------|
-| [njal.la](https://njal.la) | [VPS 15](https://njal.la/servers/) | [September 2, 2022](https://spoofer.caida.org/report.php?sessionkey=bjuru7gyraov66) |
+| Provider                       | Product                                | Date                                                                                    | Status             |
+|--------------------------------|----------------------------------------|-----------------------------------------------------------------------------------------| ------------------ |
+| ~~[njal.la](https://njal.la)~~ | ~~[VPS 15](https://njal.la/servers/)~~ | ~~[September 2, 2022](https://spoofer.caida.org/report.php?sessionkey=bjuru7gyraov66)~~ | no longer working  |
 
 If you know more server providers, please submit a pull request with the details (provider name, product name, date, and, if possible,
 a CAIDA Spoofer report).
