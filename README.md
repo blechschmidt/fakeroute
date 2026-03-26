@@ -5,7 +5,7 @@ IP address spoofing.
 
 ## Setup
 
-Install the dependencies using `pip install -r requirements.txt`. Run `sudo python fakeroute.py` on the machine for
+Install the package using `pip install .`. Run `sudo fakeroute` on the machine for
 which you want to spoof the traceroute.
 
 You can supply the path to a text file with custom IP addresses to be spoofed using `--hops`.
